@@ -20,7 +20,6 @@ const App = () => {
 
         const data = await response.json();
 
-        // The DummyJSON products API returns an object with a 'products' key
         const formatBanners = data.products.map((item) => ({
           title: item.title,
           description: item.description,
@@ -41,7 +40,7 @@ const App = () => {
 
   return (
     <main>
-      {loading ? <p>Loading banner...</p> : <HeroCarousel banners={banners} />}
+      {loading ? <p></p> : <HeroCarousel banners={banners} />}
     </main>
   );
 };
