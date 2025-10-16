@@ -18,15 +18,15 @@ export default function HomePage() {
       
         <div className="relative z-10 flex flex-col justify-center items-start h-full px-6 md:px-12 lg:px-24 space-y-6">
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold drop-shadow-lg animate-fade-in">
-            Present
+            Create Your Signature Beauty Look
           </h1>
           <p className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold drop-shadow-lg animate-fade-in delay-200">
-            Your Product to the World
+            Build your perfect makeup kit with our curated collection of essentials.
           </p>
 
          
           <div className="flex flex-col sm:flex-row gap-4 mt-6 animate-fade-in delay-400">
-            <button className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition duration-300">
+            <button className="px-6 py-3 bg-white hover:bg-pink-100/80  text-pink-600 font-bold rounded-lg shadow-lg transition duration-300">
             Get Started
           </button>
 
@@ -44,7 +44,7 @@ export default function HomePage() {
       </div>
 
      
-      <div className="p-12">
+      <div className="p-12 bg-pink-100">
         <h2 className="text-3xl font-bold text-pink-500 text-center mb-8">
           Our Product
         </h2>
@@ -52,29 +52,29 @@ export default function HomePage() {
        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+          <div className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
             <Image
-              src="/bag.webp"
+              src="/lip-stick.jpg"
               alt="Stylish Baggy Jean"
               width={400}
               height={400}
               className="w-full h-64 object-cover"
             />
-            <div className="p-4 text-center">
+            <div className="p-4 text-center ">
               <h3 className="text-lg font-semibold text-gray-800">
-                Stylish Baggy Jean
+                rose lip stick
               </h3>
               <p className="text-gray-600">$9.99</p>
-              <button className="mt-3 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700 transition">
+              <button className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md hover:bg-white transition">
                 Add to Cart
               </button>
             </div>
           </div>
 
           {/* Product Card 2 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+          <div className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
             <Image
-              src="/t-shirt.jpeg"
+              src="/eye-shadow.png"
               alt="Classic T-Shirt"
               width={400}
               height={400}
@@ -82,19 +82,19 @@ export default function HomePage() {
             />
             <div className="p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-800">
-                Classic T-Shirt
+                Eye-shadow brush
               </h3>
-              <p className="text-gray-600">$19.99</p>
-              <button className="mt-3 px-4 py-2 bg-green-500  text-white rounded-md hover:bg-green-700 transition">
+              <p className="text-gray-600">$4.99</p>
+              <button className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md hover:bg-white transition">
                 Add to Cart
               </button>
             </div>
           </div>
 
           {/* Product Card 3 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+          <div className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
             <Image
-              src="/sneakers.jpg"
+              src="/lip combo.webp"
               alt="Trendy Sneakers"
               width={400}
               height={400}
@@ -102,19 +102,19 @@ export default function HomePage() {
             />
             <div className="p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-800">
-                Trendy Sneakers
+                lip combo
               </h3>
-              <p className="text-gray-600">$89.99</p>
-              <button className="mt-3 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700 transition">
+              <p className="text-gray-600">$19.99</p>
+              <button className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md hover:bg-white transition">
                 Add to Cart
               </button>
             </div>
           </div>
 
           {/* Product Card 4 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+          <div className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
             <Image
-              src="/hoodie.jpg"
+              src="/face-scrub.webp"
               alt="Cool Hoodie"
               width={400}
               height={400}
@@ -122,10 +122,10 @@ export default function HomePage() {
             />
             <div className="p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-800">
-                Cool Hoodie
+                face scrub
               </h3>
-              <p className="text-gray-600">$39.99</p>
-              <button className="mt-3 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700 transition">
+              <p className="text-gray-600">$9.99</p>
+              <button className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md hover:bg-white transition">
                 Add to Cart
               </button>
             </div>
@@ -138,24 +138,24 @@ export default function HomePage() {
         <div className="flex flex-col sm:flex-row justify-center gap-10 items-center mx-auto">
           {/* Feature 1 */}
           <div className="flex items-center gap-2">
-            <FaTruckArrowRight className="text-green-500 text-3xl" />
-            <p className="text-green-500 text-base">
+            <FaTruckArrowRight className="text-pink-500 text-3xl" />
+            <p className="text-pink-400 text-base">
               24/7 Support - Fast Delivery - Easy Returns
             </p>
           </div>
 
           {/* Feature 2 */}
           <div className="flex items-center gap-2">
-            <BsCashCoin className="text-green-500 text-3xl" />
-            <p className="text-green-500 text-base">
+            <BsCashCoin className="text-pink-500 text-3xl" />
+            <p className="text-pink-500 text-base">
               Pay with bank online or Upon Delivery
             </p>
           </div>
 
           {/* Feature 3 */}
           <div className="flex items-center gap-2">
-            <FcCustomerSupport className="text-gray-500 text-3xl" />
-            <p className="text-green-500 text-base">
+            <FcCustomerSupport className="text-pink-500 text-3xl" />
+            <p className="text-pink-500 text-base">
               Contact us 24/7 at Customer Support
             </p>
           </div>
