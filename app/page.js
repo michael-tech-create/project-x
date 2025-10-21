@@ -18,8 +18,9 @@ export default function HomePage() {
   return (
 
     <main>
+      
     
-      <div className="relative bg-[url(/ecommerce-bg.png)] bg-cover bg-center h-[70vh] md:h-[85vh] lg:h-[100vh]">
+      <div className="relative bg-[url(/ai-gen.jpg)] bg-cover bg-center h-[60vh] md:h-[85vh] lg:h-[100vh]">
  
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent"></div>
 
@@ -28,7 +29,7 @@ export default function HomePage() {
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold drop-shadow-lg animate-fade-in">
             Create Your Signature Beauty Look
           </h1>
-          <p className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold drop-shadow-lg animate-fade-in delay-200">
+          <p className="text-white text-sm sm:text-1xl md:text-xl font-semibold drop-shadow-lg animate-fade-in delay-200">
             Build your perfect makeup kit with our curated collection of essentials.
           </p>
 
@@ -38,9 +39,6 @@ export default function HomePage() {
             Get Started
           </button>
 
-            <button className="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-full shadow-md transition-all">
-           Shop Now
-          </button>
 
           </div>
         </div>
