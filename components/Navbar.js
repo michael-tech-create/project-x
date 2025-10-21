@@ -1,12 +1,15 @@
 "use client";
 import { useState } from "react";
 import { GiQueenCrown } from "react-icons/gi";
-import { CgProfile } from "react-icons/cg";
+import { CgProfile, CgShoppingCart } from "react-icons/cg";
 import { HiMenu, HiX } from "react-icons/hi";
 import Link from "next/link";
+import { useCart } from "@/src/Context/cart";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const {cart} = useCart();
+  const totalItems = cart.reduce((sum, item)=> sum + item.quantity, 0);
 
   const navLinks = [
     { name: "Favourite", href: "/#" },
@@ -31,8 +34,8 @@ export default function Navbar() {
           {/* Hamburger (mobile only) */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="sm:hidden text-pink-600 focus:outline-none"
-            aria-label="Toggle menu"
+            className="sm:hidden text-pink-600"
+           
           >
             {menuOpen ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
           </button>
@@ -55,9 +58,16 @@ export default function Navbar() {
           ))}
           <Link href="#">
           <li>
-            <CgProfile className="text-white text-lg" aria-label="Profile" />
+            <CgProfile className="text-white text-lg"  />
           </li>
           </Link>
+          <Link
+          href="/cart"
+          className="relative flex items-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition"
+        ><CgShoppingCart size={20}/>
+        {totalItems > 0 && (<span className="absolute -top-2 -right-2 bg-white text-pink-600 texxt-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">{totalItems}</span>)}
+        </Link>
+
         </ul>
 
         {/* Mobile Dropdown Menu */}
@@ -80,6 +90,13 @@ export default function Navbar() {
               <CgProfile className="text-white text-xl" aria-label="Profile" />
             </li>
             </Link>
+             <Link
+          href="/cart"
+          className="relative flex items-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition"
+        ><CgShoppingCart size={20}/>
+        {totalItems > 0 && (<span className="absolute -top-2 -right-2 bg-white text-pink-600 texxt-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">{totalItems}</span>)}
+        </Link>
+            
           </ul>
         )}
       </div>
