@@ -1,16 +1,24 @@
 "use client";
-import { FaArrowCircleRight } from "react-icons/fa";
 import { FaTruckArrowRight } from "react-icons/fa6";
 import { BsCashCoin } from "react-icons/bs";
 import { FcCustomerSupport } from "react-icons/fc";
 import Image from "next/image";
-import App from "@/src/App";
+import { useCart } from "@/src/Context/cart";
 
 
 export default function HomePage() {
+  const { addToCart, getTotal } = useCart();
+  const products = [
+  { name: "rose lip stick", price: 9.99, image: "/lip-stick.jpg" },
+  { name: "Eye-shadow brush", price: 4.99, image: "/eye-shadow.png" },
+  { name: "lip combo", price: 19.99, image: "/lip combo.webp" },
+  { name: "face scrub", price: 6.99, image: "/face-scrub.webp" },
+];
+
   return (
+
     <main>
-      <App/>
+    
       <div className="relative bg-[url(/ecommerce-bg.png)] bg-cover bg-center h-[70vh] md:h-[85vh] lg:h-[100vh]">
  
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent"></div>
@@ -45,93 +53,42 @@ export default function HomePage() {
 
      
       <div className="p-12 bg-pink-100">
-        <h2 className="text-3xl font-bold text-pink-500 text-center mb-8">
-          Our Product
-        </h2>
-
-       
+        <h2 className="text-3xl font-bold text-pink-500 text-center mb-8">Our Product</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
-          <div className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
-            <Image
-              src="/lip-stick.jpg"
-              alt="Stylish Baggy Jean"
+          {products.map((p,i)=> (
+            <div key={i}
+            className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+              <Image
+              src={p.image}
+              alt={p.name}
               width={400}
               height={400}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-4 text-center ">
-              <h3 className="text-lg font-semibold text-gray-800">
-                rose lip stick
-              </h3>
-              <p className="text-gray-600">$9.99</p>
-              <button className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md hover:bg-white transition">
-                Add to Cart
-              </button>
-            </div>
-          </div>
+              className="w-full object-cover"
+              />
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-semibold text-gray-800">{p.name}</h3>
+                <p className="text-gray-600">{p.price}</p>
+                <button
+                onClick={() => addToCart(p)
+                }
+                className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md shadow-lg">
+                  Add to Cart
 
-          {/* Product Card 2 */}
-          <div className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
-            <Image
-              src="/eye-shadow.png"
-              alt="Classic T-Shirt"
-              width={400}
-              height={400}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-4 text-center">
-              <h3 className="text-lg font-semibold text-gray-800">
-                Eye-shadow brush
-              </h3>
-              <p className="text-gray-600">$4.99</p>
-              <button className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md hover:bg-white transition">
-                Add to Cart
-              </button>
-            </div>
-          </div>
+                </button>
 
-          {/* Product Card 3 */}
-          <div className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
-            <Image
-              src="/lip combo.webp"
-              alt="Trendy Sneakers"
-              width={400}
-              height={400}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-4 text-center">
-              <h3 className="text-lg font-semibold text-gray-800">
-                lip combo
-              </h3>
-              <p className="text-gray-600">$19.99</p>
-              <button className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md hover:bg-white transition">
-                Add to Cart
-              </button>
-            </div>
-          </div>
+              </div>
 
-          {/* Product Card 4 */}
-          <div className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
-            <Image
-              src="/face-scrub.webp"
-              alt="Cool Hoodie"
-              width={400}
-              height={400}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-4 text-center">
-              <h3 className="text-lg font-semibold text-gray-800">
-                face scrub
-              </h3>
-              <p className="text-gray-600">$9.99</p>
-              <button className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md hover:bg-white transition">
-                Add to Cart
-              </button>
-            </div>
-          </div>
+              </div>
+          ))}
+
+
         </div>
-      </div>
+
+       </div>
+       <div className="text-center mt-10 text-lg font-semibold text-pink-600">
+       total: ${getTotal().toFixed(2)}
+
+       </div>
 
    
       <div className="w-full h-auto px-4 py-6">
