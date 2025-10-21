@@ -12,11 +12,11 @@ export default function Navbar() {
   const totalItems = cart.reduce((sum, item)=> sum + item.quantity, 0);
 
   const navLinks = [
-    { name: "Favourite", href: "/#" },
+    { name: "Home", href: "/#" },
     { name: "Services", href: "/#" },
-    { name: "Pricing", href: "/#" },
+    { name: "Categories", href: "/#" },
     { name: "About Us", href: "/#" },
-    { name: "login", href: "/login" }
+    { name: "login", href: "/auth/login" }
   ];
 
   return (
