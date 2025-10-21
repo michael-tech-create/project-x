@@ -26,7 +26,7 @@ const HeroCarousel = ({ banners, interval = 5000 }) => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden mb-20">
+    <div className="relative w-full overflow-hidden">
       <div className="relative w-full" style={{ height: '100vh' }}>
         <div
           className="absolute inset-0 transition-opacity duration-1000"

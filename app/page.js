@@ -86,7 +86,6 @@ export default function HomePage() {
 
        </div>
        <div className="text-center mt-10 text-lg font-semibold text-pink-600">
-       total: ${getTotal().toFixed(2)}
 
        </div>
 
