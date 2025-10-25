@@ -44,7 +44,7 @@ export default function ServicePages() {
               transition-opacity duration-500
             ">
               <h2 className="text-2xl text-white font-semibold mb-2">
-                {service.title}
+                  {service.title}
               </h2>
               <p className="text-pink-100 text-sm">{service.desc}</p>
               <button className="mt-4 px-8 py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-lg">

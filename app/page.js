@@ -4,6 +4,10 @@ import { BsCashCoin } from "react-icons/bs";
 import { FcCustomerSupport } from "react-icons/fc";
 import Image from "next/image";
 import { useCart } from "@/src/Context/cart";
+import { CiStar } from "react-icons/ci";
+import { FaRegStarHalf } from "react-icons/fa";
+
+
 
 
 export default function HomePage() {
@@ -13,6 +17,10 @@ export default function HomePage() {
   { name: "Eye-shadow brush", price: 4.99, image: "/eye-shadow.png" },
   { name: "lip combo", price: 19.99, image: "/lip combo.webp" },
   { name: "face scrub", price: 6.99, image: "/face-scrub.webp" },
+  { name: "Dior powder", price: 6., image: "/cosmetic.jpg" },
+  { name: "Mac drop", price: 6.99, image: "/clean.jpg",  },
+  {name: "lip stick", price: 7.0, image: "/lip stick.jpg"},
+  {name: "vector skin care", price: 10.99, image: "/vector.jpg"}
 ];
 
   return (
@@ -25,7 +33,8 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent"></div>
 
       
-        <div className="relative z-10 flex flex-col justify-center items-start h-full px-6 md:px-12 lg:px-24 space-y-6">
+        <div
+        className="relative z-10 flex flex-col justify-center items-start h-full px-6 md:px-12 lg:px-24 space-y-6">
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold drop-shadow-lg animate-fade-in">
             Create Your Signature Beauty Look
           </h1>
@@ -37,6 +46,9 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 mt-6 animate-fade-in delay-400">
             <button className="px-6 py-3 bg-white hover:bg-pink-100/80  text-pink-600 font-bold rounded-lg shadow-lg transition duration-300">
             Get Started
+          </button>
+          <button className="px-6 py-3 bg-pink-600  text-white font-bold rounded-full">
+            shop now
           </button>
 
 
@@ -52,35 +64,44 @@ export default function HomePage() {
      
       <div className="p-12 bg-pink-100">
         <h2 className="text-3xl font-bold text-pink-500 text-center mb-8">Our Product</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((p,i)=> (
-            <div key={i}
-            className="bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
-              <Image
-              src={p.image}
-              alt={p.name}
-              width={400}
-              height={400}
-              className="w-full object-cover"
-              />
-              <div className="p-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-800">{p.name}</h3>
-                <p className="text-gray-600">{p.price}</p>
-                <button
-                onClick={() => addToCart(p)
-                }
-                className="mt-3 px-4 py-2 bg-white text-pink-600 rounded-md shadow-lg">
-                  Add to Cart
-
-                </button>
-
-              </div>
-
-              </div>
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  {products.map((p, i) => (
+    <div
+      key={i}
+      className="border border-pink-700/40 bg-pink-200/80 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+    >
+      <Image
+        src={p.image}
+        alt={p.name}
+        width={400}
+        height={400}
+        className="w-full object-cover border-b-2 border-pink-600/30"
+      />
+      <div className="p-4 text-center">
+        <h3 className="text-lg font-semibold text-gray-800">{p.name}</h3>
+        <p className="text-gray-600">{p.price}</p>
+        <div className="flex justify-center gap-1 text-yellow-700 my-2">
+          {[...Array(4)].map((_, i) => (
+            <CiStar key={i}
+             />
+             
           ))}
+          {[...Array(1)].map((_, i )=> (
+            <FaRegStarHalf key={i} />
 
-
+          ))}
         </div>
+        <button
+          onClick={() => addToCart(p)}
+          className="mt-3 px-4 py-2 bg-pink-600 text-white rounded-md shadow-lg hover:bg-pink-700 transition"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
 
        </div>
        <div className="text-center mt-10 text-lg font-semibold text-pink-600">
