@@ -10,31 +10,44 @@ export default function CategoriesPage() {
   ];
 
   return (
-    <main className="px-8 py-12 bg-pink-50 min-h-screen">
-      <h1 className="text-4xl font-bold text-pink-600 text-center mb-10">
-        Shop by Category
-      </h1>
+    <main className="flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 py-24 bg-gradient-to-b from-pink-50 to-pink-100 min-h-screen">
+      {/* Title Section */}
+      <div className="text-center mb-16">
+        <h1 className="text-5xl font-extrabold text-pink-600 mb-4 drop-shadow-md">
+          Shop by Category
+        </h1>
+        <p className="text-gray-700 max-w-2xl mx-auto text-lg">
+          Discover beauty essentials handpicked for your unique style — from bold lipsticks to glowing skincare.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      {/* Centered Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-center items-center max-w-6xl">
         {categories.map((cat, i) => (
-         <Link
-  key={i}
-  href={`/categories/${cat.slug}`}
-  className="group relative overflow-hidden rounded-xl shadow-lg transition-transform hover:scale-105"
->
-  <Image
-    src={cat.image}
-    alt={cat.name}
-    width={600}
-    height={500}
-    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-  />
-  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-    <h2 className="text-white text-2xl font-bold group-hover:text-pink-300 transition">
-      {cat.name}
-    </h2>
-  </div>
-</Link>
+          <Link
+            key={i}
+            href={`/categories/${cat.slug}`}
+            className="group relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-500 hover:scale-105 hover:shadow-pink-300/50"
+          >
+            {/* Image */}
+            <Image
+              src={cat.image}
+              alt={cat.name}
+              width={500}
+              height={400}
+              className="w-full h-[22rem] object-cover transition-transform duration-700 group-hover:scale-110 rounded-3xl"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end justify-center">
+              <h2 className="text-white text-3xl font-bold mb-8 group-hover:text-pink-300 transition-colors duration-300 drop-shadow-lg">
+                {cat.name}
+              </h2>
+            </div>
+
+            {/* Border glow */}
+            <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-pink-400 transition-all duration-300"></div>
+          </Link>
         ))}
       </div>
     </main>

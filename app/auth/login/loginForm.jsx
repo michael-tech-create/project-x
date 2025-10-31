@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { loginWithGoogle } from "./action";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -61,10 +62,11 @@ export default function LoginForm() {
           <p className="text-center text-gray-700 text-sm mb-2">
             Sign up with
           </p>
-
+          <form action={loginWithGoogle}>
           <button className="p-2 rounded-full hover:bg-pink-100 transition">
             <FcGoogle size={28} />
           </button>
+          </form>
         </div>
       </div>
     </main>
