@@ -1,8 +1,7 @@
-// cartFirebase.js
-db
 import { db } from "@/config/firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
+// Save user's cart to Firestore
 export const saveUserCart = async (uid, cart) => {
   try {
     const userDoc = doc(db, "carts", uid);
@@ -12,12 +11,9 @@ export const saveUserCart = async (uid, cart) => {
   }
 };
 
+// Load user's cart from Firestore
 export const loadUserCart = async (uid) => {
-<<<<<<< HEAD
-  try {gt
-=======
   try {
->>>>>>> 2f53f8fd479480b8d3cf4c10502c0a4766f875be
     const userDoc = await getDoc(doc(db, "carts", uid));
     if (userDoc.exists()) {
       return userDoc.data().items || [];
