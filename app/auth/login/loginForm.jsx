@@ -1,7 +1,8 @@
 "use client";
+import { loginWithGoogle } from "@/config/firebaseConfig";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { loginWithGoogle } from "./action";
+
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ export default function LoginForm() {
           Create Account
         </h1>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
           <label className="text-sm font-semibold text-gray-700">
             Full Name:
             <input
@@ -62,11 +63,15 @@ export default function LoginForm() {
           <p className="text-center text-gray-700 text-sm mb-2">
             Sign up with
           </p>
-          <form action={loginWithGoogle}>
-          <button className="p-2 rounded-full hover:bg-pink-100 transition">
-            <FcGoogle size={28} />
-          </button>
-          </form>
+    <form>
+  < button
+      type="button"
+      onClick={loginWithGoogle}
+      className="p-2 rounded-full hover:bg-pink-100 transition"
+    >
+    <FcGoogle size={28} />
+    </button>
+  </form>
         </div>
       </div>
     </main>
