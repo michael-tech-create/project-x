@@ -1,9 +1,28 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useCart } from "./cart";
+import LoginForm from "@/app/auth/login/loginForm";
 
 export default function CartPage() {
-  const { cart, addToCart, getTotal, removeFromCart, decreaseQuantity } = useCart();
+  const router = useRouter();
+  const { cart, addToCart, getTotal, removeFromCart, decreaseQuantity, user } = useCart();
+
+  if (!user) {
+    return (
+      <main className="min-h-screen flex flex-col justify-center items-center bg-pink-50 px-6 py-12">
+        <h1 className="text-3xl font-bold text-pink-600 mb-4">
+          Please sign in to view your cart 🛍️
+        </h1>
+        <LoginForm />
+      </main>
+    );
+  }
+
+  const handleCheckout = () => {
+    // You could save the cart in localStorage or pass it via query if needed
+    router.push("/checkout");
+  };
 
   return (
     <main className="min-h-screen bg-pink-50 px-6 py-12">
@@ -65,7 +84,10 @@ export default function CartPage() {
           </div>
 
           <div className="text-center mt-6">
-            <button className="px-8 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-lg shadow-md transition">
+            <button
+              onClick={handleCheckout}
+              className="px-8 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-lg shadow-md transition"
+            >
               Proceed to Checkout
             </button>
           </div>

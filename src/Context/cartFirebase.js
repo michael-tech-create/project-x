@@ -13,7 +13,11 @@ export const saveUserCart = async (uid, cart) => {
 };
 
 export const loadUserCart = async (uid) => {
+<<<<<<< HEAD
   try {gt
+=======
+  try {
+>>>>>>> 2f53f8fd479480b8d3cf4c10502c0a4766f875be
     const userDoc = await getDoc(doc(db, "carts", uid));
     if (userDoc.exists()) {
       return userDoc.data().items || [];

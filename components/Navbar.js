@@ -56,7 +56,7 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-          <Link href="#">
+          <Link href="/dashboard/profile">
           <li>
             <CgProfile className="text-white text-lg"  />
           </li>
@@ -84,7 +84,7 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-            <Link href="#">
+            <Link href="/dashoard/profile">
 
             <li>
               <CgProfile className="text-white text-xl" aria-label="Profile" />
