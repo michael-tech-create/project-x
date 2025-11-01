@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "./cart";
-import LoginForm from "@/app/auth/login/loginForm";
+import LoginForm from "@/app/auth/login/Form";
 
 export default function CartPage() {
   const router = useRouter();
