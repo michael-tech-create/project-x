@@ -68,7 +68,7 @@ export default function LoginForm() {
       type="button"
       onClick={loginWithGoogle}
       className="p-2 rounded-full hover:bg-pink-100 transition"
-    >
+    >d
     <FcGoogle size={28} />
     </button>
   </form>

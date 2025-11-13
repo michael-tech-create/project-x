@@ -16,11 +16,11 @@ export default function AboutPage() {
           {/* Image */}
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden shadow-md border border-pink-100">
             <Image
-              src="/makeup-pic.jpg" // ✅ Replace with your real image in /public
-              alt="About our brand"
+              src="/makeup-pic.jpg" 
+              alt="About our brand"d
               fill
               className="object-cover"
-              priority
+          
             />
           </div>
 
