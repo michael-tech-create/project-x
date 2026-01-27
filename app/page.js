@@ -1,151 +1,360 @@
 "use client";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { useCart } from "@/src/Context/cart";
-import { FaRegArrowAltCircleRight, FaArrowRight, FaStar, FaRegStarHalf, FaSmileBeam } from "react-icons/fa";
-import { BsCashCoin } from "react-icons/bs";
-import { FcCustomerSupport } from "react-icons/fc";
+import { FaArrowRight, FaStar, FaSmileBeam } from "react-icons/fa";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-
 
 export default function HomePage() {
   const { addToCart } = useCart();
+  const containerRef = useRef(null);
+
+  // Scroll Progress for Parallax effects
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Parallax transformations
+  const yText = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   const products = [
     { name: "Rose Lip Stick", price: 9.99, image: "/lip-stick.jpg" },
     { name: "Eye-shadow Brush", price: 4.99, image: "/eye-shadow.png" },
     { name: "Lip Combo", price: 19.99, image: "/lip combo.webp" },
     { name: "Face Scrub", price: 6.99, image: "/face-scrub.webp" },
-    { name: "Dior Powder", price: 6.0, image: "/cosmetic.jpg" },
-    { name: "Mac Drop", price: 6.99, image: "/clean.jpg" },
-    { name: "Lip Stick", price: 7.0, image: "/lip stick.jpg" },
-    { name: "Vector Skin Care", price: 10.99, image: "/vector.jpg" },
   ];
 
   return (
-    <main className="bg-white text-gray-800">
-      {/* ================= HERO SECTION 1 ================= */}
-      <section className="relative bg-[url(/ai-gen.jpg)] bg-cover bg-center h-[90vh] flex items-center justify-start px-10 md:px-20 lg:px-40">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
-        <div className="relative z-10 max-w-xl space-y-6">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg">
-            Beauty Beyond Limits
-          </h1>
-          <p className="text-pink-100 text-lg">
-            Discover top-quality products for every skin tone and style. Define your own glow.
-          </p>
-          <div className="flex gap-4 mt-4">
-            <button className="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-full shadow-md transition">
-              Shop Now
+    <main ref={containerRef} className="bg-white text-gray-800 overflow-hidden">
+      
+      {/* 1. CINEMATIC HERO */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <motion.div style={{ scale: heroScale }} className="absolute inset-0 z-0">
+          <video autoPlay loop muted playsInline className="w-full h-full object-cover brightness-50">
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+        </motion.div>
+
+        <div className="relative z-10 text-center space-y-6 px-4">
+          <motion.h1 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-7xl md:text-9xl font-black text-white tracking-tighter"
+          >
+            GLOW <span className="text-pink-500 italic">UP.</span>
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-pink-100 text-xl font-light tracking-widest uppercase"
+          >
+            Science Meets High-Fashion Skincare
+          </motion.p>
+
+         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.8, type: "spring" }}>
+            <button className="mt-8 px-12 py-4 bg-white text-black font-bold rounded-full hover:bg-pink-500 hover:text-white transition-all duration-500">
+              EXPLORE SHOP
             </button>
-            <button className="px-6 py-3 bg-white text-pink-600 font-bold rounded-full shadow-md hover:bg-pink-100 transition">
-              Learn More
-            </button>
-          </div>
+          </motion.div>
+          
         </div>
       </section>
 
-      {/* ================= HERO SECTION 2 (PROMO) ================= */}
-      <section className="bg-pink-50 py-16 text-center px-6 md:px-20">
-        <h2 className="text-3xl md:text-4xl font-bold text-pink-600 mb-4">
-          Elevate Your Look with Premium Products
-        </h2>
-        <p className="text-gray-700 max-w-2xl mx-auto mb-10">
-          Experience the perfect blend of elegance and care — designed for your confidence, crafted for your beauty.
-        </p>
-        <div className="flex flex-wrap justify-center gap-8">
-          <Image src="/face-scrub.webp" width={400} height={400} alt="Promo" className="rounded-2xl shadow-lg" />
-          <Image src="/lip combo.webp" width={400} height={300} alt="Promo" className="rounded-2xl shadow-lg" />
-          <Image src="/vector.jpg" width={400} height={400} alt="Promo" className="rounded-2xl shadow-lg" />
-        </div>
-      </section>
+      {/* 2. INFINITE MARQUEE */}
+      <div className="bg-black py-6 border-y border-pink-500/30 overflow-hidden flex">
+        <motion.div 
+          animate={{ x: [0, -1000] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="flex gap-20 text-pink-500 font-black text-3xl uppercase italic whitespace-nowrap"
+        >
+          {[...Array(10)].map((_, i) => (
+            <span key={i} className="flex items-center gap-4">
+              NEW ARRIVALS <FaStar className="text-white" /> 20% OFF FIRST ORDER
+            </span>
+          ))}
+        </motion.div>
+      </div>
 
-      {/* ================= PRODUCT GRID ================= */}
-      <section className="p-12 bg-pink-100">
-        <h2 className="text-3xl font-bold text-pink-600 text-center mb-8">Our Products</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* 3. PRODUCT GRID */}
+      <section className="py-32 px-10 bg-zinc-50 relative">
+        <motion.div style={{ y: yText }} className="absolute top-0 right-10 text-[15vw] font-black text-pink-100 -z-0 opacity-50 select-none">
+          BEAUTY
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
           {products.map((p, i) => (
-            <div
+            <motion.div
               key={i}
-              className="border border-pink-700/40 bg-pink-200/70 shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="group"
             >
-              <Image
-                src={p.image}
-                alt={p.name}
-                width={400}
-                height={400}
-                className="w-full h-60 object-cover border-b-2 border-pink-600/30"
-              />
-              <div className="p-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-800">{p.name}</h3>
-                <p className="text-gray-600">${p.price}</p>
-                <div className="flex justify-center gap-1 text-yellow-600 my-2">
-                  {[...Array(4)].map((_, i) => (
-                    <FaStar key={i} />
-                  ))}
-                  <FaRegStarHalf />
+              <div className="relative h-[400px] overflow-hidden rounded-[2rem] shadow-xl bg-gray-200">
+                <Image 
+                  src={p.image} 
+                  alt={p.name} 
+                  fill 
+                  className="object-cover transition-all duration-700 group-hover:scale-110" 
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <button 
+                    onClick={() => addToCart(p)}
+                    className="px-6 py-3 bg-white text-black font-bold rounded-full active:scale-90"
+                  >
+                    ADD TO CART
+                  </button>
                 </div>
-                <button
-                  onClick={() => addToCart(p)}
-                  className="mt-3 px-4 py-2 bg-pink-600 text-white rounded-md shadow-lg hover:bg-pink-700 transition"
-                >
-                  Add to Cart
-                </button>
               </div>
-            </div>
+              <div className="mt-4 flex justify-between items-center px-2">
+                <h3 className="font-bold text-xl">{p.name}</h3>
+                <span className="text-pink-600 font-black">${p.price}</span>
+              </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ================= WHY CHOOSE US ================= */}
-      <section className="bg-white py-20 px-6 md:px-16 text-center">
-        <h2 className="text-4xl font-bold text-pink-600 mb-12">Why Choose Us</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div className="bg-pink-50 rounded-2xl shadow-md p-8 hover:scale-105 transition">
-            <FaRegArrowAltCircleRight className="text-pink-500 text-5xl mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Fast & Reliable Delivery</h3>
-            <p className="text-gray-600">Get your products quickly, safely, and on time anywhere in the world.</p>
-          </div>
-
-          <div className="bg-pink-50 rounded-2xl shadow-md p-8 hover:scale-105 transition">
-            <BsCashCoin className="text-pink-500 text-5xl mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Secure Payments</h3>
-            <p className="text-gray-600">Enjoy peace of mind with our encrypted and protected payment options.</p>
-          </div>
-
-          <div className="bg-pink-50 rounded-2xl shadow-md p-8 hover:scale-105 transition">
-            <FcCustomerSupport className="text-pink-500 text-5xl mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
-            <p className="text-gray-600">Our beauty experts are always ready to help you find your perfect match.</p>
-          </div>
+      {/* 4. SPLIT AD SECTION */}
+      <section className="flex flex-col md:flex-row h-screen bg-black overflow-hidden">
+        <div className="w-full md:w-1/2 relative">
+          <Image src="/vector.jpg" fill alt="Model" className="object-cover opacity-80" />
         </div>
+
+        <motion.div 
+          initial={{ x: 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          className="w-full md:w-1/2 flex flex-col justify-center p-12 bg-zinc-100 text-black"
+        >
+          <h2 className="text-5xl font-black mb-6">SKINCARE <span className="text-pink-500">EVOLVED.</span></h2>
+          <p className="text-zinc-400 mb-8">Revolutionary products for the modern glow.</p>
+          <Link href="/categories" className="flex items-center gap-4 font-bold text-xl hover:text-pink-500 transition">
+            VIEW LOOKBOOK <FaArrowRight />
+          </Link>
+        </motion.div>
       </section>
 
-      {/* ================= ADVERTISING / CALL TO ACTION ================= */}
-      <section className="relative bg-[url(/clean.jpg)] bg-cover bg-center h-[80vh] flex items-center justify-center">
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 text-center text-white max-w-2xl">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Glow With Confidence</h2>
-          <p className="text-lg mb-6">
-            Join thousands of satisfied customers who trust us to bring out their natural radiance.
-          </p>
-          <Link href="/categories"><button className="px-6 py-3 bg-pink-500 hover:bg-pink-600 font-bold rounded-full shadow-md transition">
-            Explore Collection <FaArrowRight className="inline ml-2" />
-          </button></Link>
-        </div>
-      </section>
+  <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+  {/* Background Video with Parallax Scale */}
+  <motion.div style={{ scale: heroScale }} className="absolute inset-0 z-0">
+    {/* Using your YouTube background logic or local mp4 */}
+    <video autoPlay loop muted playsInline className="w-full h-full object-cover brightness-[0.45]">
+      <source src="/person-video.mp4" type="video/mp4" />
+    </video>
+  </motion.div>
 
-      {/* ================= TESTIMONIALS ================= */}
-      <section className="py-20 bg-pink-50 text-center">
-        <h2 className="text-4xl font-bold text-pink-600 mb-10">What Our Customers Say</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-20">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white p-8 rounded-2xl shadow-lg hover:scale-105 transition">
-              <FaSmileBeam className="text-pink-500 text-4xl mx-auto mb-4" />
-              <p className="text-gray-700 mb-4">
-                “I love their products! The quality and service are top-notch — I’ll never shop anywhere else.”
-              </p>
-              <p className="text-pink-600 font-bold">— Happy Customer</p>
-            </div>
+  {/* Overlay Gradient for that "Vogue" depth */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 z-0" />
+
+  <div className="relative z-10 text-center max-w-5xl px-6">
+    {/* Animated Sub-headline */}
+    <motion.span 
+      initial={{ opacity: 0, tracking: "0.5em" }}
+      animate={{ opacity: 1, tracking: "0.2em" }}
+      transition={{ duration: 1.5 }}
+      className="text-pink-400 font-medium text-sm md:text-base uppercase mb-4 block"
+    >
+      Est. 2026 — The Art of Radiance
+    </motion.span>
+
+    {/* Main Headline with Split Stagger */}
+    <motion.h1 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: "circOut" }}
+      className="text-6xl md:text-[10rem] font-black text-white leading-[0.85] tracking-tighter mb-8"
+    >
+      TIMELESS <br /> 
+      <span className="text-pink-500 italic font-serif">Aura.</span>
+    </motion.h1>
+    
+    {/* Long-form Storytelling Text */}
+    <motion.p 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.6, duration: 1 }}
+      className="text-gray-300 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed mb-10"
+    >
+      Beauty isn’t just a moment; it’s a legacy. We’ve spent years perfecting the 
+      delicate balance between dermatological science and the raw, uninhibited 
+      expression of artistry. From the first touch of silk-finish foundation to 
+      the final stroke of rose-pigmented lip couture, your skin becomes our 
+      finest canvas. Discover a glow that doesn't just fade—it evolves.
+    </motion.p>
+
+    {/* Dynamic Action Button with Link */}
+    <Link href="/shop" className="inline-block">
+      <motion.div 
+        initial={{ scale: 0, rotate: -10 }} 
+        animate={{ scale: 1, rotate: 0 }} 
+        transition={{ delay: 1, type: "spring", stiffness: 120 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <button className="group relative px-16 py-5 bg-pink-600 text-white font-black text-lg rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_40px_rgba(219,39,119,0.4)]">
+          <span className="relative z-10 flex items-center gap-3">
+            ENTER THE COLLECTION <FaArrowRight className="group-hover:translate-x-2 transition-transform" />
+          </span>
+          {/* Animated background fill on hover */}
+          <motion.div 
+            className="absolute inset-0 bg-white"
+            initial={{ y: "100%" }}
+            whileHover={{ y: 0 }}
+            transition={{ duration: 0.4 }}
+          />
+          <style jsx>{`
+            button:hover span { color: black; }
+          `}</style>
+        </button>
+      </motion.div>
+    </Link>
+  </div>
+
+  {/* Aesthetic Scroll Indicator */}
+  <motion.div 
+    animate={{ y: [0, 15, 0] }}
+    transition={{ repeat: Infinity, duration: 2 }}
+    className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+  >
+    <span className="text-[10px] text-white/50 uppercase tracking-[0.3em] rotate-90 mb-4">Scroll</span>
+    <div className="w-[1px] h-12 bg-gradient-to-b from-pink-500 to-transparent" />
+  </motion.div>
+      </section>
+      
+      {/* ================= 4. REDESIGNED ARTISTRY AD SECTION ================= */}
+<section className="relative min-h-screen bg-white flex flex-col md:flex-row items-stretch overflow-hidden">
+  
+  {/* LEFT SIDE: Visual with Artistic Reveal */}
+  <div className="w-full md:w-[45%] h-[60vh] md:h-auto relative overflow-hidden group">
+    <motion.div 
+      initial={{ scale: 1.3, filter: "sepia(100%)" }}
+      whileInView={{ scale: 1, filter: "sepia(0%)" }}
+      transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full h-full"
+    >
+      <Image 
+        src="/platte.jpg" 
+        fill 
+        alt="The Masterpiece" 
+        className="object-cover transition-transform duration-[4s] group-hover:scale-105" 
+      />
+    </motion.div>
+    
+    {/* Refined floating badge */}
+    <motion.div 
+      initial={{ y: 20, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.6 }}
+      className="absolute bottom-10 right-10 bg-black/80 backdrop-blur-xl px-8 py-3 rounded-none border-l-4 border-pink-500 shadow-2xl"
+    >
+      <span className="text-white text-[10px] font-bold tracking-[0.5em] uppercase italic">
+        Signature Collection
+      </span>
+    </motion.div>
+  </div>
+
+  {/* RIGHT SIDE: Narrative Content */}
+  <div className="w-full md:w-[55%] flex flex-col justify-center p-8 md:p-24 bg-white relative">
+    
+    {/* Decorative background text changed to "LEGACY" */}
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 0.03, scale: 1 }}
+      className="absolute top-10 right-[-5%] text-[15vw] font-serif italic text-black pointer-events-none select-none leading-none"
+    >
+      Legacy
+    </motion.div>
+
+    <div className="relative z-10 space-y-10">
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+      >
+        <span className="text-pink-500 font-black tracking-[0.4em] uppercase text-xs mb-6 block">
+          Behind the Velvet Curtain
+        </span>
+        <h2 className="text-5xl md:text-8xl font-black text-zinc-900 leading-[0.85] tracking-tighter">
+          AGELESS <br /> 
+          <span className="relative font-serif italic text-pink-600">
+            Artistry.
+            <motion.span 
+              initial={{ width: 0 }}
+              whileInView={{ width: "110%" }}
+              transition={{ delay: 1, duration: 1.2 }}
+              className="absolute -bottom-1 -left-2 h-[2px] bg-zinc-900 -z-10"
+            />
+          </span>
+        </h2>
+      </motion.div>
+
+      <motion.p 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="text-zinc-500 text-lg md:text-xl max-w-lg font-light leading-[1.8] italic"
+      >
+        "Every face is a silent narrative waiting for the right light. We don't just 
+        apply pigment; we curate a custom luminescence that mirrors your inner rhythm. 
+        It’s where high-definition precision meets the raw soul of beauty."
+      </motion.p>
+
+      {/* Re-styled Link Interaction */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+      >
+  <Link href="/categories" className="group inline-flex items-center gap-8">
+    <div className="relative">
+      <motion.div 
+        whileHover={{ rotate: 90 }}
+        className="w-20 h-20 rounded-full border border-zinc-200 flex items-center justify-center group-hover:border-pink-500 transition-all duration-700"
+      >
+        <FaArrowRight className="text-zinc-400 group-hover:text-pink-600 text-2xl transition-all" />
+      </motion.div>
+      <div className="absolute inset-0 rounded-full bg-pink-500/5 group-hover:scale-150 transition-transform duration-1000" />
+    </div>
+
+    <div className="flex flex-col">
+      {/* REMOVED the nested <Link> here */}
+      <span className="text-2xl font-black uppercase tracking-widest text-zinc-900">
+        The Gallery
+      </span>
+      <span className="text-[10px] text-pink-500 font-bold uppercase tracking-widest">
+        View Our Work
+      </span>
+    </div>
+  </Link>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
+
+
+      {/* 5. DRAGGABLE REVIEWS */}
+      <section className="py-32 bg-white overflow-hidden">
+        <h2 className="text-center text-3xl font-black mb-16 uppercase tracking-widest text-pink-600">Real Glows</h2>
+        <div className="flex flex-wrap justify-center gap-8">
+          {[1, 2, 3].map((item) => (
+            <motion.div
+              key={item}
+              drag
+              dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+              className="w-72 p-8 bg-zinc-50 rounded-[2rem] shadow-lg cursor-grab active:cursor-grabbing border border-zinc-100"
+            >
+              <FaSmileBeam className="text-pink-500 text-3xl mb-4" />
+              <p className="text-zinc-600 italic">"Literally transformed my routine. The Lip Stick stays on all day!"</p>
+              <p className="mt-4 font-bold text-pink-600">@USER_REVIEW</p>
+            </motion.div>
           ))}
         </div>
       </section>
