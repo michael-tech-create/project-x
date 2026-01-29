@@ -122,24 +122,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. SPLIT AD SECTION */}
       <section className="flex flex-col md:flex-row h-screen bg-black overflow-hidden">
         <div className="w-full md:w-1/2 relative">
-          <Image src="/vector.jpg" fill alt="Model" className="object-cover opacity-80" />
+          <motion.div style={{ scale: heroScale }} className="w-full h-full">
+            <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-80">
+              <source src="/mview.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
         </div>
 
         <motion.div 
           initial={{ x: 100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
-          className="w-full md:w-1/2 flex flex-col justify-center p-12 bg-zinc-100 text-black"
+          transition={{ duration: 1 }}
+          className="w-full md:w-1/2 flex flex-col justify-center p-12 md:p-24 bg-zinc-100 text-black"
         >
-          <h2 className="text-5xl font-black mb-6">SKINCARE <span className="text-pink-500">EVOLVED.</span></h2>
-          <p className="text-zinc-400 mb-8">Revolutionary products for the modern glow.</p>
-          <Link href="/categories" className="flex items-center gap-4 font-bold text-xl hover:text-pink-500 transition">
-            VIEW LOOKBOOK <FaArrowRight />
+          <h2 className="text-6xl font-black mb-6 tracking-tighter leading-none">
+            SKINCARE <br /> <span className="text-pink-500 italic font-serif">EVOLVED.</span>
+          </h2>
+          <p className="text-zinc-500 text-xl font-light mb-8 max-w-md">
+            The next generation of luminescence has arrived. Formulated for the bold, curated for the visionary.
+          </p>
+          <Link href="/categories" className="flex items-center gap-6 group">
+            <div className="w-16 h-16 rounded-full border border-black flex items-center justify-center group-hover:bg-black transition-all">
+              <FaArrowRight className="group-hover:text-white transition-colors" />
+            </div>
+            <span className="text-2xl font-black uppercase tracking-tight">View Lookbook</span>
           </Link>
         </motion.div>
       </section>
+
 
   <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
   {/* Background Video with Parallax Scale */}
@@ -338,6 +350,124 @@ export default function HomePage() {
   </div>
 </section>
 
+{/* ================= 4. REDESIGNED MOSAIC ARTISTRY SECTION ================= */}
+<section className="relative min-h-screen bg-[#fafafa] py-24 overflow-hidden">
+  
+  <div className="max-w-[1800px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-20">
+    
+    {/* LEFT SIDE: 4-Image Mosaic Grid */}
+    <div className="w-full lg:w-1/2 grid grid-cols-12 grid-rows-12 gap-4 h-[700px] md:h-[900px]">
+      
+      {/* Image 1: Main Portrait */}
+      <motion.div 
+        initial={{ clipPath: "inset(100% 0 0 0)" }}
+        whileInView={{ clipPath: "inset(0% 0 0 0)" }}
+        transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
+        className="col-span-8 row-span-8 relative overflow-hidden group"
+      >
+        <Image src="/beauty1.jpg" fill alt="Texture 1" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+        <div className="absolute inset-0 bg-pink-900/10 mix-blend-multiply" />
+      </motion.div>
+
+      {/* Image 2: Macro Texture */}
+      <motion.div 
+        initial={{ clipPath: "inset(0 0 100% 0)" }}
+        whileInView={{ clipPath: "inset(0 0 0% 0)" }}
+        transition={{ duration: 1.2, delay: 0.2 }}
+        className="col-span-4 row-span-5 col-start-9 row-start-2 relative overflow-hidden"
+      >
+        <Image src="/view.jpg" fill alt="Texture 2" className="object-cover" />
+      </motion.div>
+
+      {/* Image 3: Product Detail */}
+      <motion.div 
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 0.4 }}
+        className="col-span-5 row-span-4 col-start-2 row-start-9 relative overflow-hidden shadow-2xl"
+      >
+        <Image src="/angle.jpg" fill alt="Texture 3" className="object-cover" />
+      </motion.div>
+
+      {/* Image 4: The Glow */}
+      <motion.div 
+        initial={{ scale: 0.8, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.6 }}
+        className="col-span-6 row-span-4 col-start-7 row-start-7 relative overflow-hidden border-[12px] border-white z-10"
+      >
+        <Image src="/spa.jpg" fill alt="Texture 4" className="object-cover" />
+      </motion.div>
+
+    </div>
+
+    {/* RIGHT SIDE: Kinetic Storytelling */}
+    <div className="w-full lg:w-1/2 flex flex-col justify-center relative">
+      
+      {/* Large JS-Floating Background Text */}
+      <motion.div 
+        style={{ y: useTransform(scrollYProgress, [0, 1], [100, -100]) }}
+        className="absolute -top-10 right-0 text-[18vw] font-black text-pink-500/5 pointer-events-none select-none italic"
+      >
+        MUSE
+      </motion.div>
+
+      <div className="space-y-12 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="inline-block px-4 py-1 border border-pink-200 text-pink-500 font-bold tracking-[0.3em] uppercase text-[10px] mb-8">
+            The Masterclass Collection
+          </span>
+          
+          <h2 className="text-6xl md:text-[7rem] font-black text-zinc-900 leading-[0.8] tracking-tighter">
+            SCULPTING <br /> 
+            <span className="italic font-serif text-pink-600">Luminescence.</span>
+          </h2>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="relative pl-12 border-l-2 border-pink-100"
+        >
+          <p className="text-zinc-500 text-xl md:text-2xl font-light leading-relaxed mb-6">
+            Makeup is no longer a mask; it is a <span className="text-zinc-900 font-medium italic">reactive medium</span>. 
+            By blending raw earth minerals with hyper-fluid pigments, we’ve created a formula 
+            that breathes with you. 
+          </p>
+          <p className="text-zinc-400 text-lg">
+            Our signature 4-layer technique ensures light is captured, reflected, and 
+            diffused perfectly across every unique contour of your legacy.
+          </p>
+        </motion.div>
+
+        {/* Improved Call to Action */}
+        <motion.div 
+          whileHover={{ x: 20 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <Link href="/categories" className="inline-flex items-center gap-10 group">
+            <div className="relative">
+              <div className="w-24 h-24 rounded-full border border-zinc-900 flex items-center justify-center group-hover:bg-zinc-900 transition-all duration-500">
+                <FaArrowRight className="text-zinc-900 group-hover:text-white text-3xl group-hover:rotate-45 transition-transform duration-500" />
+              </div>
+              <motion.div 
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ repeat: Infinity, duration: 3 }}
+                className="absolute inset-0 rounded-full border border-pink-400/30 -z-10" 
+              />
+            </div>
+            
+          </Link>
+        </motion.div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
       {/* 5. DRAGGABLE REVIEWS */}
